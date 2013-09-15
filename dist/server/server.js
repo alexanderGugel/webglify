@@ -36,9 +36,9 @@
     });
   });
 
-  getElementsByTagName = function(x) {
+  getElementsByTagName = function(el) {
     var element, elements, results, _i, _len;
-    elements = x.getElementsByTagName('p');
+    elements = el.getElementsByTagName('p');
     results = [];
     for (_i = 0, _len = elements.length; _i < _len; _i++) {
       element = elements[_i];
