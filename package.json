@@ -1,0 +1,43 @@
+{
+  "name": "webglify",
+  "version": "0.0.0",
+  "main": "lib/webglify.js",
+  "description": "DOM renderer for WebGl",
+  "homepage": "https://github.com/DnMllr/webglify",
+  "bugs": "https://github.com/DnMllr/webglify/issues",
+  "author": {
+    "name": "Daniel Miller",
+    "email": "yajnavalkya@cox.net"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DnMllr/webglify"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "devDependencies": {
+    "matchdep": "~0.1.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-watch": "~0.5.0",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-simple-mocha": "~0.4.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "sinon-chai": "~2.4.0",
+    "chai": "~1.7.2",
+    "mocha": "~1.12.1",
+    "sinon": "~1.7.3",
+    "three": "~0.58.9",
+    "express": "~3.4.0",
+    "socket.io": "~0.9.16",
+    "grunt-nodemon": "~0.1.1",
+    "grunt-concurrent": "~0.3.1",
+    "grunt-express-server": "~0.4.3",
+    "jsdom": "~0.8.4"
+  },
+  "dependencies": {
+    "load-grunt-tasks": "~0.1.0"
+  }
+}
