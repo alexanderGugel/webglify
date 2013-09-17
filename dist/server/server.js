@@ -1,5 +1,5 @@
 (function() {
-  var app, getElementsByTagName, io, jsdom, server, url;
+  var HTMLparser, app, io, jsdom, phantom, server, url;
 
   app = require('express')();
 
@@ -10,6 +10,10 @@
   url = require('url');
 
   jsdom = require('jsdom');
+
+  phantom = require('phantom');
+
+  HTMLparser = require('../parsers/HTMLparser.js');
 
   server.listen(8080);
 
@@ -23,30 +27,16 @@
     });
     return socket.on('submit', function(data) {
       var queryUrl;
+      console.log('hello!');
+      console.log('heeello!');
+      console.log('heeeeello!');
       queryUrl = url.parse(data);
-      return jsdom.env({
-        url: queryUrl.href,
-        scripts: ['http://code.jquery.com/jquery.js'],
-        done: function(errors, window) {
-          var text;
-          text = getElementsByTagName(window.document);
-          return console.log(text);
-        }
+      return phantom.create(function(ph) {
+        return ph.createPage(function(page) {
+          return page.open(queryUrl, function(status) {});
+        });
       });
     });
   });
-
-  getElementsByTagName = function(el) {
-    var element, elements, results, _i, _len;
-    elements = el.getElementsByTagName('p');
-    results = [];
-    for (_i = 0, _len = elements.length; _i < _len; _i++) {
-      element = elements[_i];
-      console.log(element);
-      console.log(element.childNodes[0]);
-      results.push(element.childNodes[0].nodeValue);
-    }
-    return elements;
-  };
 
 }).call(this);

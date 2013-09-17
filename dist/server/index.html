@@ -2,19 +2,19 @@
 <head>
 <script src='/socket.io/socket.io.js'></script>
 <script src='http://code.jquery.com/jquery.js'></script>
+<script src="http://localhost:35729/livereload.js"></script>
 </head>
 <body>
-<form>
-<input type='text'></input>
-</form>
+<textarea rows='30' cols='50'></textarea>
+<button type='button'></button>
 <script>
 $(document).ready(function(){
   var socket = io.connect('http://localhost:8080')
   socket.on('return', function(data){
     console.log(data);
   })
-  $('form').on('submit', function(e){
-    socket.emit('submit', $('input').val());
+  $('button').on('click', function(e){
+    socket.emit('submit', $('textarea').text());
   })
 })
 </script>

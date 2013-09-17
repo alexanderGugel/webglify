@@ -1,8 +1,10 @@
 app = require('express')()
-server = require('http').createServer(app)
-io = require('socket.io').listen(server)
-url = require('url')
-jsdom = require('jsdom')
+server = require('http').createServer app
+io = require('socket.io').listen server
+url = require 'url'
+jsdom = require 'jsdom'
+phantom = require 'phantom'
+HTMLparser = require '../parsers/HTMLparser.js'
 
 server.listen(8080)
 
@@ -12,18 +14,9 @@ app.get '/', (req, res) ->
 io.sockets.on 'connection', (socket) ->
   socket.emit 'news', {hello: 'world'}
   socket.on 'submit', (data) ->
+    console.log('hello!')
     queryUrl = url.parse(data)
-    jsdom.env {url: queryUrl.href, scripts: ['http://code.jquery.com/jquery.js'], done: (errors, window) ->
-      text = getElementsByTagName(window.document)
-      console.log text
-      # socket.emit 'return', xyOfText
-    }
-
-getElementsByTagName = (el) ->
-  elements = el.getElementsByTagName 'p'
-  results = []
-  for element in elements
-    console.log(element)
-    console.log(element.childNodes[0])
-    results.push element.childNodes[0].nodeValue
-  return elements
+    phantom.create (ph) ->
+      ph.createPage (page) ->
+        page.open queryUrl, (status) ->
+          

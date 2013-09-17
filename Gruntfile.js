@@ -1,5 +1,6 @@
 'use strict';
 
+
 module.exports = function (grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(function(contrib) {
@@ -33,24 +34,30 @@ module.exports = function (grunt) {
         ]
       },
     },
+    copy: {
+      dist: {
+        files: [
+          {expand: true, cwd: 'src/', src: ['*/*', '!*/*.coffee'], dest: 'dist/'}
+        ]
+      }
+    },
     nodemon: {
       options: {
         file: 'dist/server/server.js',
-        watchedFolders: ['dist/app', 'dist/server']
       }
     },
-    express: {
-      server: {
+    connect: {
+      dist: {
         options: {
-          output: '.+',
-          background: true,
-          script: 'dist/server/server.js'
+          port: 8080,
+          base: 'dist/server',
+          // middleware: liveReloadMiddleware
         }
       }
     },
     concurrent: {
       target: {
-        tasks: ['nodemon', 'watch'],
+        tasks: ['nodemon', 'preview'],
         options: {
           logConcurrentOutput: true
         }
@@ -85,24 +92,12 @@ module.exports = function (grunt) {
       },
     },
     watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      coffee: {
-        files: './src/*.coffee',
-        tasks: ['coffee', 'jshint']
-      },
-      express: {
-        files: ['./dist/*.js'],
-        task: [ 'express:server'],
+      client: {
+        files: ['**/*', '!dist'],
+        tasks: ['default'],
         options: {
-          nospawn: true
+          livereload: true
         }
-      },
-      dist: {
-        files: '<%= config.src %>/*',
-        tasks: ['coffee:dist', 'simplemocha:backend']
       },
       test: {
         files: '<%= config.srcTest %>/specs/*',
@@ -177,18 +172,23 @@ module.exports = function (grunt) {
 
 
   // Default task.
-  grunt.registerTask('default', ['coffee', 'jshint']);
+  grunt.registerTask('default', ['clean', 'copy', 'coffee', 'jshint', 'test']);
 
-  grunt.registerTask('server', ['clean', 'coffee', 'jshint', 'express:server', 'concurrent:target']);
+  grunt.registerTask('server', ['clean', 'copy', 'coffee', 'jshint', 'concurrent:target']);
+
+  grunt.registerTask('preview', ['connect:dist', 'watch']);
 
   grunt.registerTask('test', [
     'clean',
+    'copy',
     'coffee',
+    'jshint',
     'simplemocha:backend',
   ]);
 
   grunt.registerTask('coverage', [
     'clean',
+    'copy',
     'coffee',
     'coverageBackend'
   ]);
