@@ -8,9 +8,6 @@
 
 
 (function() {
-  'use strict';
-  exports.awesome = function() {
-    return 'awesome';
-  };
+
 
 }).call(this);

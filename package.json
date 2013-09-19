@@ -1,7 +1,7 @@
 {
   "name": "webglify",
   "version": "0.0.0",
-  "main": "lib/webglify.js",
+  "main": "dist/server/server.js",
   "description": "DOM renderer for WebGl",
   "homepage": "https://github.com/DnMllr/webglify",
   "bugs": "https://github.com/DnMllr/webglify/issues",
@@ -42,7 +42,8 @@
     "grunt-contrib-copy": "~0.4.1",
     "connect-livereload": "~0.3.0",
     "grunt-contrib-connect": "~0.5.0",
-    "pegjs": "~0.7.0"
+    "pegjs": "~0.7.0",
+    "grunt-coffeelint": "0.0.7"
   },
   "dependencies": {
     "load-grunt-tasks": "~0.1.0"

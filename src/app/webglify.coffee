@@ -6,7 +6,6 @@
  * Licensed under the MIT license.
 ###
 
-'use strict';
+# 'use strict'
 
-exports.awesome = ->
-  'awesome'
+# exports.awesome = (md) ->

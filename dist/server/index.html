@@ -7,14 +7,16 @@
 <body>
 <textarea rows='30' cols='50'></textarea>
 <button type='button'></button>
+<div></div>
 <script>
 $(document).ready(function(){
   var socket = io.connect('http://localhost:8080')
   socket.on('return', function(data){
     console.log(data);
+    $('div').text(data)
   })
   $('button').on('click', function(e){
-    socket.emit('submit', $('textarea').text());
+    socket.emit('submit', $('textarea').val());
   })
 })
 </script>
