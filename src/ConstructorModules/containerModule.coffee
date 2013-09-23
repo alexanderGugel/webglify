@@ -1,6 +1,9 @@
-containerMaker = () ->
-  planeMaterial = new THREE.MeshBasicMaterial {color: 'white', side: THREE.DoubleSide}
-  planeGeometry = new THREE.PlaneGeometry 100,100,1,1
+module.exports = containerMaker = (node, material) ->
+  planeMaterial = material ? new THREE.MeshBasicMaterial {color: node.options.backgroundColor, side: THREE.DoubleSide}
+  planeGeometry = new THREE.PlaneGeometry node.options.width, node.options.height, 1, 1
   plane = new THREE.Mesh planeGeometry, planeMaterial
-  plane.position.y = -0.5
+  plane.position.y = node.options.y
+  plane.position.x = node.options.x
+  plane.position.z = node.options.z
   plane.rotation.x = 45*(Math.Pi / 180)
+  plane
