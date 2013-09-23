@@ -45,8 +45,8 @@ makeText = (text, hash, maxWidth, maxHeight) ->
   group.position.y = Math.abs yPos/2
   return group
 
-getTextElem = (text, fontSize, maxWidth, maxHeight, depth) ->
-  table = makeLookUp text, fontSize
-  textElem = makeText text, table, maxWidth, maxHeight
-  textElem.traslateZ depth
+module.exports = textMaker = (node) ->
+  table = makeLookUp node.tag, 12
+  textElem = makeText node.tag, table, node.options.width, node.options.height
+  textElem.traslateZ node.options.z
   return textElem

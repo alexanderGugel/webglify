@@ -1,4 +1,4 @@
-containerMaker = require '/containerModule.js'
+containerMaker = require './containerModule.js'
 
 arrayBufferDataUri = (raw) ->
   base64 = ''
@@ -43,5 +43,5 @@ createImageMaterial = (url) ->
       img.src = arrayBufferDataUri xhr.response
   xhr.send()
 
-module.exports = imageTexture = (node) ->
+module.exports = imageMaker = (node) ->
   containerMaker node, createImageMaterial node.tag

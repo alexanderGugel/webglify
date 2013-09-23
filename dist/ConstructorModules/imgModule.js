@@ -1,5 +1,7 @@
 (function() {
-  var arrayBufferDataUri, createImageMaterial;
+  var arrayBufferDataUri, containerMaker, createImageMaterial, imageMaker;
+
+  containerMaker = require('./containerModule.js');
 
   arrayBufferDataUri = function(raw) {
     var a, b, base64, byteLength, byteRemainder, bytes, c, chunk, d, encodings, i, mainLength, _i;
@@ -55,6 +57,10 @@
       }
     };
     return xhr.send();
+  };
+
+  module.exports = imageMaker = function(node) {
+    return containerMaker(node, createImageMaterial(node.tag));
   };
 
 }).call(this);

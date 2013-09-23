@@ -1,5 +1,5 @@
 (function() {
-  var getTextElem, makeLookUp, makeText;
+  var makeLookUp, makeText, textMaker;
 
   makeLookUp = function(text, fontSize) {
     var canvas, character, context, face, hash, letter, quad, texture, _i, _len;
@@ -66,11 +66,11 @@
     return group;
   };
 
-  getTextElem = function(text, fontSize, maxWidth, maxHeight, depth) {
+  module.exports = textMaker = function(node) {
     var table, textElem;
-    table = makeLookUp(text, fontSize);
-    textElem = makeText(text, table, maxWidth, maxHeight);
-    textElem.traslateZ(depth);
+    table = makeLookUp(node.tag, 12);
+    textElem = makeText(node.tag, table, node.options.width, node.options.height);
+    textElem.traslateZ(node.options.z);
     return textElem;
   };
 

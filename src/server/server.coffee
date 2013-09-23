@@ -13,4 +13,7 @@ app.get '/', (req, res) ->
 io.sockets.on 'connection', (socket) ->
   socket.emit 'news', {hello: 'world'}
   socket.on 'submit', (data) ->
-    webglify parser data
+    value = data.data
+    x = data.windowSize[0]
+    y = data.windowSize[1]
+    webglify parser value, x, y

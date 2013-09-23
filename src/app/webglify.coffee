@@ -6,6 +6,9 @@
  * Licensed under the MIT license.
 ###
 
-# 'use strict'
+dresser = require '../compiler/dresser.js'
+layout = require '../LayoutModules/layoutModule.js'
 
-# exports.awesome = (md) ->
+
+module.exports = WebGlify = (syntax) ->
+  layout dresser syntax

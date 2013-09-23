@@ -24,7 +24,11 @@
       hello: 'world'
     });
     return socket.on('submit', function(data) {
-      return webglify(parser(data));
+      var value, x, y;
+      value = data.data;
+      x = data.windowSize[0];
+      y = data.windowSize[1];
+      return webglify(parser(value, x, y));
     });
   });
 

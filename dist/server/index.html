@@ -16,7 +16,11 @@ $(document).ready(function(){
     $('div').text(data)
   })
   $('button').on('click', function(e){
-    socket.emit('submit', $('textarea').val());
+    object = {
+      data: $('textarea').val(),
+      windowSize: [window.innerwidth, window.innerheight]
+    };
+    socket.emit('submit', object);
   })
 })
 </script>

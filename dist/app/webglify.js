@@ -8,6 +8,14 @@
 
 
 (function() {
+  var WebGlify, dresser, layout;
 
+  dresser = require('../compiler/dresser.js');
+
+  layout = require('../LayoutModules/layoutModule.js');
+
+  module.exports = WebGlify = function(syntax) {
+    return layout(dresser(syntax));
+  };
 
 }).call(this);
