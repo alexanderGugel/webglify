@@ -15,6 +15,6 @@ window.WebGlify = (data) ->
   value = data.data
   scene = layout dresser parser value
   renderer = new THREE.WebGLRenderer {antialias: true, precision: 'highp'}
-  renderer.setSize window.innerWidth, window.innerHeight
+  renderer.setSize window.innerWidth+10, window.innerHeight+10
   document.body.appendChild renderer.domElement
   renderer.render scene.scene, scene.camera
