@@ -1,4 +1,4 @@
-htmlparse = require('htmlparser')
+htmlparse = require 'htmlparser'
 
 findElementsByType = (type, element) ->
   results = []

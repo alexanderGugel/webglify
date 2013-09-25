@@ -1,11 +1,12 @@
-texter = require '../ConstructorModules/textModule.js'
-imager = require '../ConstructorModules/imgModule.js'
-container = require '../ConstructorModules/containerModule.js'
+texter = require '../ConstructorModules/textModule.coffee'
+imager = require '../ConstructorModules/imgModule.coffee'
+container = require '../ConstructorModules/containerModule.coffee'
 
 module.exports = layoutMaker = (syntax) ->
+  console.log syntax
   width = syntax.options.width
   height = syntax.options.height
-  viewAngle = 45
+  viewAngle = 90
   aspect = width/height
   near = 0.1
   far = 10000
@@ -13,16 +14,16 @@ module.exports = layoutMaker = (syntax) ->
   renderer.setSize width, height
   camera = new THREE.PerspectiveCamera viewAngle, aspect, near, far
   scene = new THREE.Scene()
-  scene.add camera
-  camera.position.z = 300
-  recursiveRenderer = (node) ->
-    switch syntax.options.type
-      when 'image'
-        scene.add imager node
-      when 'text'
-        scene.add texter node
-      when 'block'
-        scene.add container node
-    recurser child for child in node.children
-  recursiveRenderer syntax
-  scene
+  camera.position.set 0, 0, 300
+  recursiveStager = (node) ->
+    if node.options.type is 'text'
+      scene.add texter node
+    else if node.options.type is 'block'
+      scene.add container node
+    recursiveStager child for child in node.children
+  recursiveStager syntax
+  console.log scene
+  object =
+    scene: scene,
+    camera: camera
+  object

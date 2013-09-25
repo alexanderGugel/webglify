@@ -7,24 +7,30 @@ module.exports = function (grunt) {
     clean: ['dist/*'],
     copy: {
       main: {
-        files: [{expand: true, cwd: 'src/', src: ['**', '!**/*.coffee'], dest: 'dist/'}]
+        files: [{expand: true, cwd: 'src/', src: ['index.html'], dest: 'dist/'}]
       }
     },
-    coffee: {
-      main: {
-        files: [{expand: true, cwd: 'src/', src: '{,*/}*.coffee', dest: 'dist/', ext: '.js'}]
-      }
+    coffeeify: {
+      options: {
+        debug: true
+      },
+      files: { src:['src/**/*.coffee'], dest: 'dist/build.js' }
     },
-    nodemon: {
-      dev: {}
-    },
+    // nodemon: {
+    //   dev: {}
+    // },
     watch: {
-      options: {livereload: true},
-      files: ['src/**/*'],
-      tasks: ['default']
+      coffee: {
+        files: ['src/**/*.coffee', 'Gruntfile.js'],
+        tasks: ['default']
+      },
+      html: {
+        files: ['src/index.html'],
+        tasks: ['copy']
+      }
     },
     concurrent: {
-      tasks: ['nodemon', 'watch'],
+      tasks: ['watch'],
       options: {
         logConcurrentOutput: true
       }
@@ -37,6 +43,11 @@ module.exports = function (grunt) {
         src: 'Gruntfile.js'
       }
     },
+    uglify: {
+      files: {
+        dest: 'dist/build.min.js', src:['dist/build.js']
+      }
+    },
     coffeelint: {
       options: {
         'max_line_length': {
@@ -47,6 +58,6 @@ module.exports = function (grunt) {
     }
   });
   require('load-grunt-tasks')(grunt);
-  grunt.registerTask('default', ['jshint', 'coffeelint', 'clean', 'copy', 'coffee']);
-  grunt.registerTask('server', ['default', 'concurrent']);
+  grunt.registerTask('default', ['jshint', 'coffeelint', 'clean', 'copy', 'coffeeify', 'uglify', 'concurrent']);
+  // grunt.registerTask('server', ['default', 'concurrent']);
 };

@@ -1,4 +1,4 @@
-containerMaker = require './containerModule.js'
+containerMaker = require './containerModule.coffee'
 
 arrayBufferDataUri = (raw) ->
   base64 = ''

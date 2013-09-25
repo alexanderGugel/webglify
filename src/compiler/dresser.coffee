@@ -1,32 +1,31 @@
-module.exports = dresser = (syntax) ->
-  syntax.options.x ?= -window.innerwidth/2
-  syntax.options.y ?= -window.innerheight/2
-  syntax.options.z ?= syntax.options.depth
-  syntax.options.height ?= window.innerheight
-  syntax.options.width ?= window.innerwidth
-  syntax.options.backgroundColor ?= '#FFFFFF'
-  syntax.options.childType ?= 'vertical'
-  for child, index in syntax.children
-    child.options.type = if syntax.options.childType isnt 'horizontal' or syntax.options.childType isnt 'vertical' then syntax.options.childType else 'block'
-    child.options._parentX ?= syntax.options.x
-    child.options._parentY ?= syntax.options.y
-    switch syntax.options.childType
+module.exports = dresser = (node) ->
+  node.options.x ?= 0
+  node.options.y ?= 0
+  node.options.z = node.depth
+  node.options.height ?= 300
+  node.options.width ?= 200
+  node.options.backgroundColor ?= '#FFFFFF'
+  node.options.childType ?= 'vertical'
+  for child, index in node.children
+    child.options.type = 'block' if node.options.childType is 'horizontal' or node.options.childType is 'vertical'
+    child.options.type ?= node.options.childType
+    switch node.options.childType
       when 'horizontal'
-        if syntax.children[index-1]? then child.options.x ?= syntax.children[index-1].options.width else child.options.x ?= syntax.options.x
-        child.options.y ?= syntax.options.y
-        child.options.width ?= syntax.options.width/syntax.children.length
-        child.options.height ?= syntax.options.height
+        child.options.x ?= node.options.width*(index/node.children.length)-((node.options.width/2)-((node.options.width/node.children.length)/2))
+        child.options.y ?= node.options.y
+        child.options.width ?= node.options.width/node.children.length
+        child.options.height ?= node.options.height
       when 'vertical'
-        if syntax.children[index-1]? then child.options.y ?= syntax.children[index-1].options.height else child.options.y ?= syntax.options.y
-        child.options.x ?= syntax.options.x
-        child.options.height ?= syntax.options.height/syntax.children.length
-        child.options.width ?= syntax.options.width
+        child.options.y ?= node.options.height*(index/node.children.length)-((node.options.height/2)-((node.options.height/node.children.length)/2))
+        child.options.x ?= node.options.x
+        child.options.height ?= node.options.height/node.children.length
+        child.options.width ?= node.options.width
       when 'image', 'text'
-        child.options.x ?= syntax.options.x
-        child.options.y ?= syntax.options.y
-        child.options.width ?= syntax.options.width
-        child.options.height ?= syntax.options.height
+        child.options.x ?= node.options.x
+        child.options.y ?= node.options.y
+        child.options.width ?= node.options.width
+        child.options.height ?= node.options.height
       when 'image'
         child.tag = 'http://'.concat(child.tag) if child.tag.slice 0, 7 isnt 'http://'
     dresser child
-  syntax
+  node

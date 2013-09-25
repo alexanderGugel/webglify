@@ -32,15 +32,23 @@ objectifier = (element) ->
 
 segmenter = (array) ->
   results = []
-  recurser = (array2) ->
+  recurser = (array2, position) ->
     for element, index in array2
       for i in [array2.length-1..index+1] by -1
         if element.depth is array2[i].depth
-          recurser array2.slice i
-          recurser array2.slice 0, i
+          recurser array2.slice(i), position+i
+          recurser array2.slice(0, i), position
           return false
-    results.unshift array2
-  recurser array
+    results[position] = array2
+  remover = (array2) ->
+    results2 = []
+    for element in array2
+      if element?
+        results2.push element
+    return results2
+  recurser array, 0
+  results = remover results
+  console.log results
   results
 
 inheriter = (array) ->
@@ -49,9 +57,16 @@ inheriter = (array) ->
       child = subArray[j]
       parent = subArray[j-1]
       parent.children.push child
-  for subArray, index in array when index isnt array.length-1
-    lostChild = array[index+1][0]
-    for potentialSibling, index in subArray
-      if potentialSibling.depth is lostChild.depth
-        subArray[index-1].children.push lostChild
+  for i in [array.length-1..0] by -1
+    subArray = array[i]
+    lostChild = subArray[0]
+    for j in [i-1..0] by -1 when i isnt 0
+      potentialHome = array[j]
+      root = potentialHome[0]
+      if root.depth < lostChild.depth
+        for potentialSibling, index in potentialHome
+          if potentialSibling.depth is lostChild.depth
+            potentialHome[index-1].children.splice 1, 0, lostChild
+            break
+        break
   array[0][0]

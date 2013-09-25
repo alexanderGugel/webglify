@@ -6,9 +6,15 @@
  * Licensed under the MIT license.
 ###
 
-dresser = require '../compiler/dresser.js'
-layout = require '../LayoutModules/layoutModule.js'
+dresser = require '../compiler/dresser.coffee'
+layout = require '../LayoutModules/layoutModule.coffee'
+parser = require '../parsers/webglifyPARSER.coffee'
 
 
-module.exports = WebGlify = (syntax) ->
-  layout dresser syntax
+window.WebGlify = (data) ->
+  value = data.data
+  scene = layout dresser parser value
+  renderer = new THREE.WebGLRenderer {antialias: true, precision: 'highp'}
+  renderer.setSize window.innerWidth, window.innerHeight
+  document.body.appendChild renderer.domElement
+  renderer.render scene.scene, scene.camera

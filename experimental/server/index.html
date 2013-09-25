@@ -1,0 +1,27 @@
+<html>
+<head>
+<script src='/socket.io/socket.io.js'></script>
+<script src='http://code.jquery.com/jquery.js'></script>
+<script src="http://localhost:35729/livereload.js"></script>
+</head>
+<body>
+<textarea rows='30' cols='50'></textarea>
+<button type='button'></button>
+<div></div>
+<script>
+$(document).ready(function(){
+  var socket = io.connect('http://localhost:8080')
+  socket.on('return', function(data){
+    console.log(data);
+    $('div').text(data)
+  })
+  $('button').on('click', function(e){
+    object = {
+      data: $('textarea').val(),
+      windowSize: [window.innerwidth, window.innerheight]
+    };
+    socket.emit('submit', object);
+  })
+})
+</script>
+</body>
