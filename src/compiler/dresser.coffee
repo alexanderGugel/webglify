@@ -32,7 +32,6 @@ module.exports = dresser = (node) ->
         child.options.width ?= node.options.width
         child.options.height ?= node.options.height
         if node.options.backgroundColor is '#000000' or node.options.backgroundColor is 'black'
-          console.log 'black detected'
           child.options.backgroundColor ?= 'white'
         else
           child.options.backgroundColor is 'black'
@@ -41,10 +40,7 @@ module.exports = dresser = (node) ->
         child.options.y ?= node.options.y
         child.options.width ?= node.options.width
         child.options.height ?= node.options.height
-        debugger
-        console.log child.options
         for key, value of child.options
-          if key[0] is '/' then child.tag += key
-          console.log child.tag
+          if key[0] is '/' then child.tag += ':' + key
     dresser child
   node

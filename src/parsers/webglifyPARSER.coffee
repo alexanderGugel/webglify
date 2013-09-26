@@ -48,7 +48,6 @@ segmenter = (array) ->
     return results2
   recurser array, 0
   results = remover results
-  console.log results
   results
 
 inheriter = (array) ->

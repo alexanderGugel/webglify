@@ -5,5 +5,4 @@ module.exports = containerMaker = (node, material) ->
   plane.position.y = node.options.y
   plane.position.x = node.options.x
   plane.position.z = node.options.z
-  # plane.rotation.x = 45*(Math.Pi / 180)
   plane

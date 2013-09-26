@@ -3,7 +3,6 @@ imager = require '../ConstructorModules/imgModule.coffee'
 container = require '../ConstructorModules/containerModule.coffee'
 
 module.exports = layoutMaker = (syntax) ->
-  console.log syntax
   width = syntax.options.width
   height = syntax.options.height
   viewAngle = 45
@@ -24,7 +23,6 @@ module.exports = layoutMaker = (syntax) ->
       scene.add imager node
     recursiveStager child for child in node.children
   recursiveStager syntax
-  console.log scene
   object =
     scene: scene,
     camera: camera
