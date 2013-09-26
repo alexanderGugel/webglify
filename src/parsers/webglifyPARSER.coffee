@@ -1,8 +1,17 @@
+# parser takes the raw WebGLify input and returns a syntax tree to be dressed.
 module.exports = parser = (text) ->
+
+  # break all lines into string elements in an array.
   lines = text.split '\n'
+
+  # malformed is the array of lines before the lines have objectified and filtered.
   malformed = []
+
+  # for every line:
   for line in lines
+    # find the first non white space character.
     firstNonWhiteSpaceIndex = line.indexOf /\S/.exec line
+    # isolate the whitespace of the line into it's own array.
     whitespace = line.slice(0, firstNonWhiteSpaceIndex)
     if line.indexOf(':') isnt -1
       tagSpace = line.slice firstNonWhiteSpaceIndex, line.indexOf ':'
