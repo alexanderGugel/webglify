@@ -11,11 +11,19 @@ layout = require '../LayoutModules/layoutModule.coffee'
 parser = require '../parsers/webglifyPARSER.coffee'
 renderer = require '../renderer/renderer.coffee'
 
-
+# create our WebGlify Function
 module.exports = WebGlify = (data, baseWidth, baseHeight) ->
-  value = data
-  scene = layout dresser (parser value), baseWidth, baseHeight
+
+  # block is our WebGLify code
+  block = data
+
+  #  scene is the THREE.JS scene that is created by our modules
+  scene = layout dresser (parser block), baseWidth, baseHeight
+
+  #  Initializing our renderer
   renderer.init scene.scene, scene.camera
+
+  # return the WebGLify Object
   WebGlifyObj =
     renderer: renderer
     render: ->
@@ -25,9 +33,10 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
 
 
 
-window.WebGlify = (data) ->
-  value = data
-  scene = layout dresser parser value
-  renderer.init scene.scene, scene.camera
-  document.body.appendChild renderer.domElement
-  renderer.render()
+#  Direct access to the WebGLify function now depricated, may reimpliment later.
+# window.WebGlifyDirect = (data) ->
+#   value = data
+#   scene = layout dresser parser value
+#   renderer.init scene.scene, scene.camera
+#   document.body.appendChild renderer.domElement
+#   renderer.render()
