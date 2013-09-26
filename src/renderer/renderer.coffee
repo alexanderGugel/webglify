@@ -1,5 +1,6 @@
 module.exports =
-  render: ()->
+  render: (width, height)->
+    @renderer.setSize width ? document.body.scrollWidth, height ? document.body.scrollHeight
     @renderer.render(@scene, @camera)
   init: (scene, camera) ->
     renderer = new THREE.WebGLRenderer {antialias: true, precision: 'highp'}

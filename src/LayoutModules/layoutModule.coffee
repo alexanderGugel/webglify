@@ -13,7 +13,7 @@ module.exports = layoutMaker = (syntax) ->
   renderer.setSize width, height
   camera = new THREE.PerspectiveCamera viewAngle, aspect, near, far
   scene = new THREE.Scene()
-  camera.position.set 0, 0, (window.innerWidth*2)/3
+  camera.position.set 0, 0, 800
   recursiveStager = (node) ->
     if node.options.type is 'text'
       scene.add texter node
