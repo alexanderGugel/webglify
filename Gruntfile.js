@@ -7,7 +7,7 @@ module.exports = function (grunt) {
     clean: ['dist/*'],
     copy: {
       main: {
-        files: [{expand: true, cwd: 'src/', src: ['index.html'], dest: 'dist/'}]
+        files: [{expand: true, cwd: 'src/', src: ['*.html'], dest: 'dist/'}]
       },
       images: {
         files: [{expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/images/'}]
@@ -17,7 +17,7 @@ module.exports = function (grunt) {
       options: {
         debug: true
       },
-      files: { src:['src/**/*.coffee'], dest: 'dist/build.js' }
+      files: { src:['src/**/*.coffee'], dest: 'dist/WebGLify.js' }
     },
     // nodemon: {
     //   dev: {}
@@ -28,7 +28,7 @@ module.exports = function (grunt) {
         tasks: ['default']
       },
       html: {
-        files: ['src/index.html'],
+        files: ['src/*.html'],
         tasks: ['copy']
       }
     },
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
     },
     uglify: {
       files: {
-        dest: 'dist/build.min.js', src:['dist/build.js']
+        dest: 'dist/WebGLify.min.js', src:['dist/WebGLify.js']
       }
     },
     coffeelint: {

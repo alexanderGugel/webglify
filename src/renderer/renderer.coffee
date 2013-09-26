@@ -3,7 +3,7 @@ module.exports =
     @renderer.render(@scene, @camera)
   init: (scene, camera) ->
     renderer = new THREE.WebGLRenderer {antialias: true, precision: 'highp'}
-    renderer.setSize window.innerWidth+10, window.innerHeight+10
+    renderer.setSize document.body.scrollWidth, document.body.scrollHeight
     scene.add camera
     @renderer = renderer
     @scene = scene

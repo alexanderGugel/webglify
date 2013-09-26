@@ -1,9 +1,9 @@
-module.exports = dresser = (node) ->
+module.exports = dresser = (node, baseWidth, baseHeight) ->
   node.options.x ?= 0
   node.options.y ?= 0
   node.options.z = node.depth*2
-  node.options.height ?= window.innerHeight
-  node.options.width ?= window.innerWidth
+  node.options.height ?= baseHeight ? document.body.scrollHeight
+  node.options.width ?= baseWidth ? document.body.scrollWidth
   node.options.backgroundColor ?= '#FFFFFF'
   node.options.childType ?= 'vertical'
   for child, index in node.children
