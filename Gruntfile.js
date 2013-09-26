@@ -7,21 +7,21 @@ module.exports = function (grunt) {
     clean: ['dist/*'],
     copy: {
       main: {
-        files: [{expand: true, cwd: 'src/', src: ['*.html'], dest: 'dist/'}]
+        files: [{expand: true, cwd: 'src/', src: ['*.html', 'HTMLexamples/*.html'], dest: 'dist/'}]
       },
       images: {
         files: [{expand: true, cwd: 'src/images/', src: ['**'], dest: 'dist/images/'}]
+      },
+      lib: {
+        files: [{expand: true, cwd: 'lib/', src: ['three.js', 'three.min.js'], dest: 'dist/lib/'}]
       }
     },
     coffeeify: {
       options: {
         debug: true
       },
-      files: { src:['src/**/*.coffee'], dest: 'dist/WebGLify.js' }
+      files: { src:['src/**/*.coffee'], dest: 'dist/lib/WebGLify.js' }
     },
-    // nodemon: {
-    //   dev: {}
-    // },
     watch: {
       coffee: {
         files: ['src/**/*.coffee', 'Gruntfile.js'],
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
     },
     uglify: {
       files: {
-        dest: 'dist/WebGLify.min.js', src:['dist/WebGLify.js']
+        dest: 'dist/lib/WebGLify.min.js', src:['dist/lib/WebGLify.js']
       }
     },
     coffeelint: {
@@ -62,5 +62,4 @@ module.exports = function (grunt) {
   });
   require('load-grunt-tasks')(grunt);
   grunt.registerTask('default', ['jshint', 'coffeelint', 'clean', 'copy', 'coffeeify', 'uglify', 'concurrent']);
-  // grunt.registerTask('server', ['default', 'concurrent']);
 };

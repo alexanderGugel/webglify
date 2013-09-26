@@ -7,7 +7,9 @@ module.exports = layoutMaker = (syntax) ->
 
   # set the width and height for the camera aspect ratio to the width and height of the root node of the syntax. The renderer will use the same values.
   width = syntax.options.width
+  console.log width
   height = syntax.options.height
+  console.log height
 
   # default properties for the camera.
   viewAngle = 45

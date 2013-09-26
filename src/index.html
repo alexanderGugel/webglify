@@ -3,13 +3,22 @@
 <script src="WebGLify.js">
 
 WebGLify--
-  block: childType: horizontal
-    block: childType: vertical
-      block: childType: text, backgroundColor: green
-        hello There
-      block: childType: text, backgroundColor: red
-        welcome to WebGLify
-    block: childType: image
-      /dist/images/cow2.jpg
+  block: childType: vertical
+    block: childType: horizontal, height: 90, y: 10
+      block: childType: vertical, width: 20, x:-80
+        block: childType: text
+          Hello There!
+        block: childType: text
+          Welcome to WebGLify
+        block: childType: text
+          a simple markup language
+        block: childType: text
+          for creating static documents in
+        block: childType: text
+          WebGL!
+      block: childType: image, width: 80, x: 20
+        /dist/images/cow2.jpg
+    block: childType: text, height: 10, y: -90
+      Created by Daniel Miller as a personal project while at Hack Reactor.
 
 </script>

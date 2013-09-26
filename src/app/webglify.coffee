@@ -21,13 +21,13 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
   scene = layout dresser (parser block), baseWidth, baseHeight
 
   #  Initializing our renderer
-  renderer.init scene.scene, scene.camera
+  renderer.init scene.scene, scene.camera, baseWidth, baseHeight
 
   # return the WebGLify Object
   WebGlifyObj =
     renderer: renderer
-    render: ->
-      renderer.render()
+    render: (width, height)->
+      renderer.render width, height
     node: renderer.domElement
     scene: scene
 

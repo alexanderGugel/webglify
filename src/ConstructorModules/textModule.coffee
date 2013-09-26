@@ -60,7 +60,7 @@ makeText = (text, hash, maxWidth, maxHeight) ->
   yPos = 0
 
   # render text as long as it fits in it's container vertically.
-  for character in text when Math.abs yPos < maxHeight
+  for character in text when Math.abs(yPos) < maxHeight
 
     # xPos keeps track of the offset of each new character horizontally.
     xPos = 0
@@ -91,18 +91,19 @@ makeText = (text, hash, maxWidth, maxHeight) ->
       # create a new line.
       line = new THREE.Object3D()
     else
-      # not sure if this else is necessary, seems redundant given lines 76 and 77. I must have had a reason to write this, right?
-      letter.position.x = xPos
-      line.position.x = -xPos/2
       line.add(letter)
 
-  # when we run out of text update the last line and add it to the group.
-  yPos -= letter.geometry.height
-  line.position.y = yPos
-  group.add line
+  # when we run out of text grab the last letter if it exists.
+  if letter?
+    
+    # and do a final carriage return for it.
+    yPos -= letter.geometry.height
+    line.position.y = yPos
+    group.add line
 
-  # position the group based on the number of lines and their height, then return the group.
-  group.position.y = Math.abs(yPos/2)+letter.geometry.height/2
+    # position the group based on the number of lines and their height, then return the group.
+    group.position.y = Math.abs(yPos/2)+letter.geometry.height/2
+
   group
 
 # textMaker takes in a node and returns a group of rendered characters.

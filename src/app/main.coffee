@@ -8,6 +8,7 @@ window.wglify =
     webglifyObj = @WebGLify block, node.scrollWidth, node.scrollHeight
 
     # apply it to the target node
+    node.innerHTML = ''
     node.appendChild webglifyObj.node
 
     # define a function that allows the container node to report it's instance of webglify
@@ -21,17 +22,18 @@ window.wglify =
       # canvas element in which the scene is rendered
       canvas: webglifyObj.node
       #function to rerender whenever the size changes
-      setSize: (width, height) ->
+      setSize: ->
         @width = @node.scrollWidth
         @height = @node.scrollHeight
         if @width isnt @canvas.width or @height isnt @canvas.height
           #TODO: complete setSize function. only rerenders currently, should change size: consider using THREEx.WindowResize
-          @render
+          @render @width, @height
       #function to allow rerendering directly on the instance
       render: ->
-        webglifyObj.render()
+        webglifyObj.render @width, @height
 
     #render the instance on initialization
+    instance.setSize()
     instance.render()
     #return the instance
     instance
@@ -40,7 +42,11 @@ window.wglify =
   populateContent: ->
 
     #collect all relevent script tags.
-    scripts = (Array.prototype.slice.call document.querySelectorAll '[type="text/WebGLify"]').concat Array.prototype.slice.call document.querySelectorAll '[src*="WebGLify.js"]'
+    scripts1 = Array.prototype.slice.call document.querySelectorAll '[src*="WebGLify.js"]'
+    scripts2 = Array.prototype.slice.call document.querySelectorAll '[type="text/WebGLify"]'
+    console.log scripts1, scripts2
+    scripts = scripts1.concat scripts2
+    console.log scripts
 
     #store the instances
     instances = []
@@ -61,12 +67,12 @@ window.wglify =
         instances.push wglify.renderBlock script.innerHTML, nodes[0]
 
     # add a resize event listener. TODO: make this work.
-    window.addEventListener 'resize', (evt) ->
-      for instance in instances
-        instance.setSize
+    # window.addEventListener 'resize', (evt) ->
+    #   for instance in instances
+    #     instance.setSize
   #give our wglify object access to the WebGLify function
   WebGLify: require './webglify.coffee'
 
 #run on DOM ready
-document.addEventListener 'DOMContentLoaded', (event) ->
+window.onload = ->
   wglify.populateContent()

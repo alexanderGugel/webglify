@@ -3,13 +3,13 @@ module.exports =
 
   # the render function rerenders the renderer to a particular size, if given one, or the document's proportions, if not.
   render: (width, height)->
-    @renderer.setSize width ? document.body.scrollWidth, height ? document.body.scrollHeight
+    @renderer.setSize width ? window.document.body.offsetWidth, height ? window.innerHeight, true
     @renderer.render(@scene, @camera)
 
   # initializer defines the renderer.
-  init: (scene, camera) ->
+  init: (scene, camera, baseWidth, baseHeight) ->
     renderer = new THREE.WebGLRenderer {antialias: true, precision: 'highp'}
-    renderer.setSize document.body.scrollWidth, document.body.scrollHeight
+    renderer.setSize baseWidth ? window.document.body.offsetWidth, baseHeight ? window.innerHeight
     scene.add camera
     @renderer = renderer
     @scene = scene
