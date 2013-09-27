@@ -25,17 +25,11 @@ module.exports = function (grunt) {
     watch: {
       coffee: {
         files: ['src/**/*.coffee', 'Gruntfile.js'],
-        tasks: ['default']
+        tasks: ['dev']
       },
       html: {
         files: ['src/*.html', 'src/HTMLexamples/*.html'],
-        tasks: ['default']
-      }
-    },
-    concurrent: {
-      tasks: ['watch'],
-      options: {
-        logConcurrentOutput: true
+        tasks: ['dev']
       }
     },
     jshint: {
@@ -61,5 +55,6 @@ module.exports = function (grunt) {
     }
   });
   require('load-grunt-tasks')(grunt);
-  grunt.registerTask('default', ['jshint', 'coffeelint', 'clean', 'copy', 'coffeeify', 'uglify', 'concurrent']);
+  grunt.registerTask('default', ['jshint', 'coffeelint', 'clean', 'copy', 'coffeeify', 'uglify']);
+  grunt.registerTask('dev', ['default', 'watch']);
 };
