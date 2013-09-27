@@ -34,6 +34,9 @@ This assumes that there are no pre-existing HTML elements and will replace the b
 The WebGLify instance will conform to the size of the container targetted.
 
 ## Documentation
+
+### Intro
+#### A Simple Example.
 Here is a simple example of WebGlify code:
 
 ```
@@ -44,9 +47,12 @@ WebGLify--
 
 This code will render the word "Hello" in the center of the container it is targetted to (assumed to be document.body if no target is specified). WebGLify code must begin with the tag 'WebGlify--', which is used as a root for the syntax tree. The root can take options, but it is recommended that you do not apply options to the root unless you've read the source code and know how the dresser function (stored in src/compiler/dresser.coffee) will interpret them. 
 
-Whitespace is significant in WebGlify, so children of the parent must be consistently indented from the parent. No element other than "Styles--" In this simple example the sole child of the root is the element "block." The block itself has the option 'childType' specified as 'text.'
+Whitespace is significant in WebGlify, so children of the parent must be consistently indented from the parent. No element other than "Styles--" may be at the same indentation level as the root. In this simple example the sole child of the root is the element "block." The block has the option 'childType' specified as 'text.' This tells the parser that the block's child is a text element.
 
-This option is essential as the child 'Hello' needs to be interpreted as plain text.
+"childType" has four possible values: text, image, horizontal, or vertical. As we've seen, text specifies that the blocks's child is a text element, image specifies that the elements child is an image URL, horizontal and vertical tell the parser that the block's children are blocks and specify which way their flow should be specified.
+
+#### Default Flow
+
 
 ## Examples
 _(Coming soon)_
