@@ -28,7 +28,7 @@ module.exports = function (grunt) {
         tasks: ['default']
       },
       html: {
-        files: ['src/**.html'],
+        files: ['src/*.html', 'src/HTMLexamples/*.html'],
         tasks: ['default']
       }
     },

@@ -1,9 +1,9 @@
 # WebGlify [![Build Status](https://secure.travis-ci.org/DnMllr/webglify.png?branch=master)](http://travis-ci.org/DnMllr/webglify)
 
-DOM renderer for WebGl
+A simple markup language that creates documents in WebGl.
 
 ## Getting Started
-Install the module with: `npm install webglify`
+
 
 ```javascript
 var webglify = require('webglify');
