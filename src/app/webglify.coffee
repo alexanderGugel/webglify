@@ -23,8 +23,6 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
   #  Initializing our renderer
   renderer.init scene.scene, scene.camera, baseWidth, baseHeight
 
-  console.log scene
-
   # return the WebGLify Object
   WebGlifyObj =
     renderer: renderer
@@ -33,7 +31,8 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
       renderer.render width, height
     node: renderer.domElement
     scene: scene
-    elements: scene.nodes
+    THREEelems: scene.THREEelems
+    glifyElems: scene.glifyElems
 
 
 

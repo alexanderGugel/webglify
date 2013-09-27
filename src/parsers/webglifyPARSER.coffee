@@ -1,5 +1,6 @@
 # parser takes the raw WebGLify input and returns a syntax tree to be dressed.
 module.exports = parser = (text) ->
+  debugger
 
   # break all lines into string elements in an array.
   lines = text.split '\n'

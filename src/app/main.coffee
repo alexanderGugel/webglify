@@ -30,7 +30,11 @@ window.wglify =
           #TODO: complete setSize function. only rerenders currently, should change size: consider using THREEx.WindowResize
           @render @width, @height
 
-      elements: webglifyObj.elements
+      # Three objects
+      THREEelems: webglifyObj.THREEelems
+
+      # WebGlify Nodes
+      WebGlifyElems: webglifyObj.glifyElems
 
       #function to allow rerendering directly on the instance
       render: ->

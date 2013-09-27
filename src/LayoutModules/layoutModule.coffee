@@ -23,7 +23,13 @@ layout =
     @scene = new THREE.Scene()
 
     # instantiate node list.
-    @nodes =
+    @THREEelems =
+      images: []
+      text: []
+      containers: []
+      all: []
+
+    @glifyElems =
       images: []
       text: []
       containers: []
@@ -39,10 +45,12 @@ layout =
     options =
       scene: @scene,
       camera: @camera
-      nodes: @nodes
+      THREEelems: @THREEelems
+      glifyElems: @glifyElems
 
   # recursively traverse the syntax tree and add every rendered node to the scene. Set the stage!
   recursiveStager: (node) ->
+ 
     # handle each case.
     if node.options.type is 'text'
       threejsElm = texter node
@@ -53,12 +61,19 @@ layout =
     else
       threejsElm = container node
       location = 'containers'
+
     # give the element a name
     threejsElm.name = "#{node.options.type ? node.tag}: " + node.depth + ':' + Math.floor(Math.random()*899 + 100)
+
     # add the element where it is needed
-    @nodes[location].push threejsElm
-    @nodes.all.push threejsElm
+    @THREEelems[location].push threejsElm
+    @THREEelems.all.push threejsElm
     @scene.add threejsElm
+
+    # add the node where it is needed
+    @glifyElems[location].push node
+    @glifyElems.all.push node
+
     # recurse through the tree.
     @recursiveStager child for child in node.children
 
