@@ -73,6 +73,7 @@ WebGLify--
 ```
 
 Will be interpreted in this way: 
+
 1. First 'WebGLify--' will become the root and will be the entire size of it's target container.
 2. Because 'WebGLify--' only has one child, that child will be given the entirety of 'WebGLify--''s space. So the next block will also be the entire size of the container.
 3. 'childType: horizontal' specifies that my children will also be blocks, and will divide my space horizontally.
