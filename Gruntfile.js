@@ -28,8 +28,8 @@ module.exports = function (grunt) {
         tasks: ['default']
       },
       html: {
-        files: ['src/*.html'],
-        tasks: ['copy']
+        files: ['src/**.html'],
+        tasks: ['default']
       }
     },
     concurrent: {

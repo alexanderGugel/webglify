@@ -1,9 +1,18 @@
 # parser takes the raw WebGLify input and returns a syntax tree to be dressed.
-module.exports = parser = (text) ->
-  debugger
+module.exports = chunker = (text) ->
+  codeIndex = text.indexOf 'WebGLify--'
+  styleIndex = text.indexOf 'Styles--'
+  glifyBlock = text.slice codeIndex, styleIndex
+  styleBlock = text.slice styleIndex
+  obj =
+    code: parser glifyBlock
+    style: parser styleBlock
+
+parser = (text) ->
 
   # break all lines into string elements in an array.
   lines = text.split '\n'
+
 
   # malformed is the array of lines before the lines have objectified and filtered.
   malformed = []
@@ -21,7 +30,7 @@ module.exports = parser = (text) ->
       # isolate the tagSpace between the first significant character and the colon.
       tagSpace = line.slice firstNonWhiteSpaceIndex, line.indexOf ':'
 
-      if tagSpace is 'block'
+      if tagSpace isnt 'WebGLify--' and tagSpace isnt 'Styles--'
         # find the options and strip them of whitesplace.
         options = line.slice(line.indexOf(':')+1).replace /\s/g, ''
 

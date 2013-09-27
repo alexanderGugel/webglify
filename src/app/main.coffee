@@ -36,7 +36,7 @@ window.wglify =
       # WebGlify Nodes
       WebGlifyElems: webglifyObj.glifyElems
 
-      #function to allow rerendering directly on the instance
+      # function to allow rerendering directly on the instance
       render: ->
         webglifyObj.render @width, @height
     

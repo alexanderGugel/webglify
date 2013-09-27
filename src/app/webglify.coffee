@@ -7,6 +7,7 @@
 ###
 
 dresser = require '../compiler/dresser.coffee'
+styler = require '../compiler/styler.coffee'
 layout = require '../LayoutModules/layoutModule.coffee'
 parser = require '../parsers/webglifyPARSER.coffee'
 renderer = require '../renderer/renderer.coffee'
@@ -17,8 +18,12 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
   # block is our WebGLify code
   block = data
 
+  codeObj = parser block
+
+  block = styler codeObj.code, codeObj.style
+
   #  scene is the THREE.JS scene that is created by our modules
-  scene = layout.layoutMaker dresser (parser block), baseWidth, baseHeight
+  scene = layout.layoutMaker dresser block, baseWidth, baseHeight
 
   #  Initializing our renderer
   renderer.init scene.scene, scene.camera, baseWidth, baseHeight
@@ -27,7 +32,7 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
   WebGlifyObj =
     renderer: renderer
     render: (width, height)->
-      scene = layout.layoutMaker dresser (parser block), baseWidth, baseHeight
+      scene = layout.layoutMaker dresser block, baseWidth, baseHeight
       renderer.render width, height
     node: renderer.domElement
     scene: scene
