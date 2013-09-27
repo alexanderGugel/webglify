@@ -20,7 +20,7 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
 
   codeObj = parser block
 
-  block = styler codeObj.code, codeObj.style
+  block = if codeObj.style? then styler(codeObj.code, codeObj.style) else codeObj.code
 
   #  scene is the THREE.JS scene that is created by our modules
   scene = layout.layoutMaker dresser block, baseWidth, baseHeight

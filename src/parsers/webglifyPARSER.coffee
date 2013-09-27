@@ -3,10 +3,10 @@ module.exports = chunker = (text) ->
   codeIndex = text.indexOf 'WebGLify--'
   styleIndex = text.indexOf 'Styles--'
   glifyBlock = text.slice codeIndex, styleIndex
-  styleBlock = text.slice styleIndex
+  styleBlock = text.slice(styleIndex) if styleIndex isnt -1
   obj =
     code: parser glifyBlock
-    style: parser styleBlock
+    style: parser(styleBlock) if styleIndex isnt -1
 
 parser = (text) ->
 
