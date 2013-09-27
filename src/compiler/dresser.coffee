@@ -8,8 +8,9 @@ module.exports = dresser = (node, baseWidth, baseHeight) ->
   # multiply the node depth by 2 so that  elements in the normal flow are placed on even z-values and floated elements are placed on odd.
   node.options.z = node.depth*2
   # If a height and width aren't specified, assume the full window size.
-  node.options.height ?= baseHeight ? document.body.scrollHeight
   node.options.width ?= baseWidth ? document.body.scrollWidth
+  node.options.height ?= baseHeight ? document.body.scrollHeight
+
   # house cleaning.
   node.options.backgroundColor ?= '#FFFFFF'
   node.options.childType ?= 'vertical'

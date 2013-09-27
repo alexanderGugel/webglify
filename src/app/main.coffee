@@ -1,5 +1,5 @@
 WebGLify = require './webglify.coffee'
-animate = require '../renderer/animationEngine.coffee'
+# animate = require '../renderer/animationEngine.coffee'
 
 window.wglify =
 
@@ -38,8 +38,8 @@ window.wglify =
     instance.setSize()
     instance.render()
 
-    if animate.animationList.length?
-      animate.animate()
+    # if animate.animationList.length?
+    #   animate.animate()
 
     #return the instance
     instance
