@@ -17,13 +17,13 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
   # block is our WebGLify code
   block = data
 
-  console.log layout
-
   #  scene is the THREE.JS scene that is created by our modules
   scene = layout.layoutMaker dresser (parser block), baseWidth, baseHeight
 
   #  Initializing our renderer
   renderer.init scene.scene, scene.camera, baseWidth, baseHeight
+
+  console.log scene
 
   # return the WebGLify Object
   WebGlifyObj =
@@ -33,6 +33,7 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
       renderer.render width, height
     node: renderer.domElement
     scene: scene
+    elements: scene.nodes
 
 
 

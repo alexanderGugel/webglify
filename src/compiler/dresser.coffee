@@ -14,6 +14,7 @@ module.exports = dresser = (node, baseWidth, baseHeight) ->
   # house cleaning.
   node.options.backgroundColor ?= '#FFFFFF'
   node.options.childType ?= 'vertical'
+  node.options.type ?= 'root'
 
   # animation.animationList.push(node) if node.options.animation?
 

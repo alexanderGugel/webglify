@@ -23,12 +23,15 @@ window.wglify =
       # canvas element in which the scene is rendered
       canvas: webglifyObj.node
       #function to rerender whenever the size changes
-      setSize: ->
-        @width = @node.scrollWidth
-        @height = @node.scrollHeight
+      setSize: (width, height) ->
+        @width = width ? @node.scrollWidth
+        @height = height ? @node.scrollHeight
         if @width isnt @canvas.width or @height isnt @canvas.height
           #TODO: complete setSize function. only rerenders currently, should change size: consider using THREEx.WindowResize
           @render @width, @height
+
+      elements: webglifyObj.elements
+
       #function to allow rerendering directly on the instance
       render: ->
         webglifyObj.render @width, @height
