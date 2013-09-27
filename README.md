@@ -5,11 +5,11 @@ A simple markup language that creates documents in WebGl.
 ## Getting Started
 Install by cloning down the repo and running
 
-  npm install
+    npm install
 
 in your console. After the installation is complete run grunt to create the build by typing
 
-  grunt
+    grunt
 
 WebGLify.js and WebGLify.min.js will be created in the directory dist/lib along with three.js and three.min.js which are dependencies.
 
@@ -33,18 +33,20 @@ This assumes that there are no pre-existing HTML elements and will replace the b
 
 The WebGLify instance will conform to the size of the container targetted.
 
-```javascript
-var webglify = require('webglify');
-webglify.awesome(); // "awesome"
-```
-
-```coffee-script
-webglify = require 'webglify'
-webglify.awesome() // "awesome"
-```
-
 ## Documentation
-_(Coming soon)_
+Here is a simple example of WebGlify code:
+
+```
+WebGLify--
+  block: childType: text
+    Hello
+```
+
+This code will render the word "Hello" in the center of the container it is targetted to (assumed to be document.body if no target is specified). WebGLify code must begin with the tag 'WebGlify--', which is used as a root for the syntax tree. The root can take options, but it is recommended that you do not apply options to the root unless you've read the source code and know how the dresser function (stored in src/compiler/dresser.coffee) will interpret them. 
+
+Whitespace is significant in WebGlify, so children of the parent must be consistently indented from the parent. No element other than "Styles--" In this simple example the sole child of the root is the element "block." The block itself has the option 'childType' specified as 'text.'
+
+This option is essential as the child 'Hello' needs to be interpreted as plain text.
 
 ## Examples
 _(Coming soon)_
