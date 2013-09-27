@@ -1,4 +1,5 @@
 WebGLify = require './webglify.coffee'
+animate = require '../renderer/animationEngine.coffee'
 
 window.wglify =
 
@@ -31,10 +32,15 @@ window.wglify =
       #function to allow rerendering directly on the instance
       render: ->
         webglifyObj.render @width, @height
+    
 
     #render the instance on initialization
     instance.setSize()
     instance.render()
+
+    if animate.animationList.length?
+      animate.animate()
+
     #return the instance
     instance
 
@@ -44,9 +50,7 @@ window.wglify =
     #collect all relevent script tags.
     scripts1 = Array.prototype.slice.call document.querySelectorAll '[src*="WebGLify.js"]'
     scripts2 = Array.prototype.slice.call document.querySelectorAll '[type="text/WebGLify"]'
-    console.log scripts1, scripts2
     scripts = scripts1.concat scripts2
-    console.log scripts
 
     #store the instances
     instances = []
@@ -63,6 +67,7 @@ window.wglify =
       nodes = document.querySelectorAll script.getAttribute('target') or 'body'
       # if there are targeted nodes
       if nodes.length?
+        nodes[0].style.margin = 0 if not script.getAttribute('target')?
         # then create an instance and push it into the collection of instances
         instances.push wglify.renderBlock script.innerHTML, nodes[0]
 

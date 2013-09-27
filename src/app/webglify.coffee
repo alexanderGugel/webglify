@@ -27,6 +27,7 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
   WebGlifyObj =
     renderer: renderer
     render: (width, height)->
+      scene = layout dresser (parser block), baseWidth, baseHeight
       renderer.render width, height
     node: renderer.domElement
     scene: scene

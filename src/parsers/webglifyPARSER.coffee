@@ -19,14 +19,30 @@ module.exports = parser = (text) ->
     if line.indexOf(':') isnt -1
       # isolate the tagSpace between the first significant character and the colon.
       tagSpace = line.slice firstNonWhiteSpaceIndex, line.indexOf ':'
-      # find the options and strip them of whitesplace.
-      options = line.slice(line.indexOf(':')+1).replace /\s/g, ''
-      # break them into their own array.
-      options = options.split ','
-      # split each option into pairs to await objectification as key value pairs.
-      options = (option.split ':' for option in options)
-      # push into malformed our newly created array of abstracted syntax.
-      malformed.push [whitespace.length, tagSpace, options]
+
+      if tagSpace is 'block'
+        # find the options and strip them of whitesplace.
+        options = line.slice(line.indexOf(':')+1).replace /\s/g, ''
+
+        # seperate out animations
+        if options.indexOf('animation') isnt -1
+          animation = options.slice options.indexOf('animation'), options.indexOf(']')+1
+          animationOpts = animation.slice animation.indexOf('[')+1, animation.indexOf(']')
+          animationOpts = animationOpts.split ','
+          animationOpts = (animationOpt.split ':' for animationOpt in animationOpts)
+          options = options.replace ',' + animation, ''
+
+        # break them into their own array.
+        options = options.split ','
+        # split each option into pairs to await objectification as key value pairs.
+        options = (option.split ':' for option in options)
+
+        # reapply animations
+        if animationOpts?
+          options.push ['animation', animationOpts]
+
+        # push into malformed our newly created array of abstracted syntax.
+        malformed.push [whitespace.length, tagSpace, options]
     else
       # if the line has no options then push all content into the malformed array.
       content = line.slice(firstNonWhiteSpaceIndex)
@@ -57,6 +73,14 @@ objectifier = (syntaxArr) ->
 
   # insert the options as key value pairs.
   object.options[option[0]] = option[1] for option in syntaxArr[2]
+
+  if object.options.animation?
+    
+    animations = {}
+
+    animations[animation[0]] = animation[1] for animation in object.options.animation
+
+    object.options.animation = animations
 
   # return the object
   object

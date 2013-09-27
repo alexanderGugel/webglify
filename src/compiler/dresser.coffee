@@ -1,3 +1,4 @@
+animation = require '../renderer/animationEngine.coffee'
 
 # The Dresser traverses through the sytanx tree and insures that all nodes along the tree have the minimum required information to be rendererd properly.
 module.exports = dresser = (node, baseWidth, baseHeight) ->
@@ -12,6 +13,8 @@ module.exports = dresser = (node, baseWidth, baseHeight) ->
   # house cleaning.
   node.options.backgroundColor ?= '#FFFFFF'
   node.options.childType ?= 'vertical'
+
+  # animation.animationList.push(node) if node.options.animation?
 
   # Place children relative to parent. Position floats in relation to their normal position.
   for child, index in node.children
