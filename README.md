@@ -79,7 +79,7 @@ Will be interpreted in this way:
 3. "childType: horizontal" specifies that my children will also be blocks, and will divide my space horizontally.
 4. The two children blocks will form equally sized colored rectangles that are each half the size of their parent container. The red block will be on the left and the blue block will be on the right. If "vertical" was specified rather than "horizontal," red would be on the top and blue would be on the bottom.
 
-Suppose you didn't want elements to divide their parents space evenly. Perhaps you wanted them to divide their parents space so that the red block would have 30% of the space and the blue block would have 70% of the space. You could alter their width parameter like so:
+Suppose you didn't want elements to divide their parents space evenly. Perhaps you wanted them to divide their parents space so that the red block would have 30% of the space and the blue block would have 70% of the space. You could alter their width parameters like so:
 
 ```
 WebGLify--
@@ -115,6 +115,28 @@ Images and text currently have a number of limitations, but both are fully featu
 Images can take either a local URL to the file or a http:// call as long as your environment has the CORS permission to download the image and render it as a texture. It might be worth it to serve your document from a server even for local use due to this. This is a known issue in three.js as WebGL opened up a potential attack vector through shaders and so browsers are very suspicious of external resources being used as a texture. It isn't my fault (I swear).
 
 These issues will be taken care of in future builds very soon. 
+
+
+#### Styles
+
+```
+WebGLify--
+  block: childType: horizontal
+    block: a: style
+    block: b: style
+
+Styles--
+  a
+    backgroundColor: blue
+    width: 70
+    x: 30
+  b
+    backgroundColor: red
+    width: 30
+    x: -70
+```
+
+Hey look, you can do this too. You can define CSS-like selectors for your WebGLify code.
 
 ## Examples
 _(Coming soon)_
