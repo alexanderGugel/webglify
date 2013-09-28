@@ -136,7 +136,7 @@ Styles--
     x: -70
 ```
 
-Hey look, you can do this too. You can define CSS-like selectors for your WebGLify code.
+Oh hey look, you can do this too. You can define CSS-like selectors for your WebGLify code.
 
 ## Examples
 _(Coming soon)_
