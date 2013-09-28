@@ -112,7 +112,7 @@ WebGLify--
 
 Images and text currently have a number of limitations, but both are fully featured aside from those limitations! Text automatically spawns in the center of its parent container and might be difficult to move reliably due to some wonky behavior of the renderer. It presently character wraps, as opposed to word wrap, and will simply stop rendering if it takes up more vertical space than its parent container. Also, there is only one font and one size that is currently available. More options for text are currently in the works though.
 
-Images can take either a local URL to the file or a http:// call as long as your environment has the CORS permission to download the image and render it as a texture. It might be worth it to serve your document from a server even for local use due to this. This is a known issue in three.js as WebGL opened up a potential attack vector through shaders and so browsers are very suspicious of external resources being used as a texture. It isn't my fault (I swear).
+Images can take either a local URL to the file or a http:// call as long as your environment has the CORS permission to download the image and render it as a texture. It might be worth it to serve your document from a server even for local use due to this. This is a known issue in three.js as WebGL opened up a potential attack vector through shaders and so browsers are very suspicious of external resources being used as a texture.
 
 These issues will be taken care of in future builds very soon. 
 
@@ -136,16 +136,68 @@ Styles--
     x: -70
 ```
 
-Oh hey look, you can do this too. You can define CSS-like selectors for your WebGLify code.
+Oh hey look, you can do this too. You can define CSS-like selectors for your WebGLify code. Use the given syntax, the selectors don't have colons, all selectors are children of the root, all of the properties that they are associated with are children of the selector. The selectors will overwrite each other as well as the element's original properties in the order they are applied, so you can use them as mixins.
+
+#### External Functions
+
+When a WebGLify instance is associated with a node you can call the function '.getGLifyInstance()' on the node and get the GLify instance. The instance is an object with the following properties and methods:
+
+1. THREEelems
+  * An object that contains all the three.js elements within the scene associated with this instance. They are organized into arrays stored as properties by type.
+    ** All
+    ** containers
+    ** images
+    ** text
+2. WebGlifyElems
+  * An object that contains all the WebGlify elements within the instance. They are organized into arrays stored as properties by type.
+    ** All
+    ** containers
+    ** images
+    ** text
+3. Canvas
+  * The canvas in which the three.js scene is rendered.
+4. Node
+  * A reference to the node that the instance is contained within. Don't know why you'd want this given that you probably found this instance by calling '.getGLifyInstance()' on that node, but here it is.
+5. render
+  * a function that renders the instance to the size it is currently set to.
+6. setSize
+  * a function that takes a width and height, or defaults to the node's proportions, and sets the size of the instance to those properties.
+7. width
+8. height
 
 ## Examples
-_(Coming soon)_
+```html
+<!doctype html>
+<script src='../lib/three.js'></script>
+<script src="./lib/WebGLify.js">
+
+WebGLify--
+  block: childType: vertical
+    block: childType: horizontal, height: 90, y: 10
+      block: childType: vertical, width: 20, x:-80, animation: [x: 4, y: 5]
+        block: childType: text
+          Hello There!
+        block: childType: text
+          Welcome to WebGLify
+        block: childType: text
+          a simple markup language
+        block: childType: text
+          for creating static documents in
+        block: childType: text
+          WebGL!
+      block: childType: image, width: 80, x: 20
+        /dist/images/cow2.jpg
+    block: childType: text, height: 10, y: -90
+      Created by Daniel Miller as a personal project while at Hack Reactor.
+
+</script>
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+Friday, September 27th: v0.0000000000001
 
 ## License
 Copyright (c) 2013 Daniel Miller. Licensed under the MIT license.
