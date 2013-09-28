@@ -144,18 +144,16 @@ When a WebGLify instance is associated with a node you can call the function '.g
 
 1. THREEelems
   * An object that contains all the three.js elements within the scene associated with this instance. They are organized into arrays stored as properties by type.
-
-    ** All
-    ** containers
-    ** images
-    ** text
+    * All
+    * containers
+    * images
+    * text
 2. WebGlifyElems
   * An object that contains all the WebGlify elements within the instance. They are organized into arrays stored as properties by type.
-
-    ** All
-    ** containers
-    ** images
-    ** text
+    * All
+    * containers
+    * images
+    * text
 3. Canvas
   * The canvas in which the three.js scene is rendered.
 4. Node
