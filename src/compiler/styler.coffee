@@ -1,4 +1,5 @@
 module.exports = (code, styles) ->
+  # apply the styles associated with the selector to the elements who need them.
   for child in styles.children
     options = {}
     selector = child.tag
@@ -9,7 +10,7 @@ module.exports = (code, styles) ->
         element.options[property] = value
   code
 
-
+# Find all nodes with a particular selector.
 recursiveSearch = (node, term) ->
   results = []
   searcher = (node, term) ->

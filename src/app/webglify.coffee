@@ -18,8 +18,10 @@ module.exports = WebGlify = (data, baseWidth, baseHeight) ->
   # block is our WebGLify code
   block = data
 
+  # create a codeObject with parsed WebGLify code and styles
   codeObj = parser block
 
+  # If there is a style sheet, then apply it.
   block = if codeObj.style? then styler(codeObj.code, codeObj.style) else codeObj.code
 
   #  scene is the THREE.JS scene that is created by our modules

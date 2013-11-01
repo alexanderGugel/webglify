@@ -57,7 +57,11 @@ window.wglify =
     #collect all relevent script tags.
     scripts1 = Array.prototype.slice.call document.querySelectorAll '[src*="WebGLify.js"]'
     scripts2 = Array.prototype.slice.call document.querySelectorAll '[type="text/WebGLify"]'
-    scripts = scripts1.concat scripts2
+    scripts3 = Array.prototype.slice.call document.querySelectorAll '[src*="WebGLify.min.js"]'
+    scripts = scripts1.concat scripts2.concat scripts3
+
+    console.log scripts1
+    console.log scripts2
 
     #store the instances
     instances = []

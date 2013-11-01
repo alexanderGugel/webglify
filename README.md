@@ -143,14 +143,14 @@ Oh hey look, you can do this too. You can define CSS-like selectors for your Web
 When a WebGLify instance is associated with a node you can call the function '.getGLifyInstance()' on the node and get the GLify instance. The instance is an object with the following properties and methods:
 
 1. THREEelems
-  * An object that contains all the three.js elements within the scene associated with this instance. They are organized into arrays stored as properties by type.
-    * All
+  * An object that contains all the three.js elements within the scene associated with this instance. They are organized into arrays stored as properties by type:
+    * all
     * containers
     * images
     * text
 2. WebGlifyElems
-  * An object that contains all the WebGlify elements within the instance. They are organized into arrays stored as properties by type.
-    * All
+  * An object that contains all the WebGlify elements within the instance. They are organized into arrays stored as properties by type:
+    * all
     * containers
     * images
     * text
@@ -174,7 +174,7 @@ When a WebGLify instance is associated with a node you can call the function '.g
 WebGLify--
   block: childType: vertical
     block: childType: horizontal, height: 90, y: 10
-      block: childType: vertical, width: 20, x:-80, animation: [x: 4, y: 5]
+      block: childType: vertical, width: 20, x:-80
         block: childType: text
           Hello There!
         block: childType: text
@@ -183,7 +183,7 @@ WebGLify--
           a simple markup language
         block: childType: text
           for creating static documents in
-        block: childType: text
+        block: childType: text, backgroundColor: green
           WebGL!
       block: childType: image, width: 80, x: 20
         /dist/images/cow2.jpg
