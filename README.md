@@ -88,7 +88,7 @@ WebGLify--
     block: backgroundColor: blue, width: 70
 ```
 
- **But this is doesn't get us all the way there yet!** The options given to a WebGLify element only affect their parameter and all other parameters are assumed to be part of the default flow. So merely changing the width of the red and blue blocks will change their width, and their width alone, so they will no longer be in contact with each other. You also need to offset the block's x position to make up for the change in width. This would be the correct way to achieve:
+ **But this is doesn't get us all the way there yet!** The options given to a WebGLify element only affect their parameter and all other parameters are assumed to be part of the default flow. So merely changing the width of the red and blue blocks will change their width, and their width alone, so they will no longer be in contact with each other. You also need to offset the block's x position to make up for the change in width. This would be the correct way to achieve the desired effect:
 
 ```
 WebGLify--
