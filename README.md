@@ -165,6 +165,15 @@ When a WebGLify instance is associated with a node you can call the function '.g
 7. width
 8. height
 
+#### Future Improvements
+
+Some new features are currently in the works, and some of their code is present in this build, though commented out. These stems will become fully fledged features very soon.
+
+1. Animations will be coming very soon.
+2. jQuery like functions.
+3. Text rendering will be improved.
+4. HTML parser so that you can WebGLify html.
+
 ## Examples
 ```html
 <!doctype html>
