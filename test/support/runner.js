@@ -1,20 +1,20 @@
 'use strict';
 
-require('./globals');
+require('./globals');
 
-var grunt = require('grunt');
-var Mocha = require('mocha');
+var grunt = require('grunt');
+var Mocha = require('mocha');
 
-var mocha = new Mocha({ reporter: 'spec', ui: 'bdd'});
+var mocha = new Mocha({ reporter: 'spec', ui: 'bdd'});
 
 function run(cb) {
-  var files = grunt.file.expand(__dirname + '/../dist/**/*.spec.js');
+  var files = grunt.file.expand(__dirname + '/../dist/**/*.spec.js');
   console.log(files)
   files.forEach(function (file) {
-    mocha.addFile(file);
-  });
+    mocha.addFile(file);
+  });
 
-  cb();
+  cb();
 }
 
 run(function (err) {
